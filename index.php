@@ -16,22 +16,77 @@
     </div>
 </main>
 <script>
+    let importedNotesArray = [];
+    let theNotesCompilationForHTML = '';
 
     /*
     * JSON download & parsing in notesArray
+
      */
     let xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
         if (this.readyState === 4 && this.status === 200) {
             let notesArray = JSON.parse(xhttp.responseText).notes;
-            let theNotes = ''; //useless
 
-            // Classement par date (les + récents d'abord)
+            // Reclassement des notes par date (les + récentes d'abord)
             notesArray.sort(function (a, b) {
                 if (a.creationDate < b.creationDate) return 1;
                 if (a.creationDate > b.creationDate) return -1;
             })
+            /*
+            * Instanciation des notes en f° du contenu (si(tableau) : {} else)
+            */
+
+            for (let i = 0; i < notesArray.length; i++) {
+                let importedNote;
+                if (notesArray[i].content[1].length > 1) {
+                    importedNote = new ToDoList(notesArray[i].title, notesArray[i].importanceColor, notesArray[i].creationDate, notesArray[i].content, notesArray[i].contentChecked);
+                } else {
+                    importedNote = new Reminder(notesArray[i].title, notesArray[i].importanceColor, notesArray[i].creationDate, notesArray[i].content);
+                }
+                importedNotesArray.push(importedNote);
+            }
         }
+    }
+    /*
+    Je dois pouvoir déstocker et stocker dans notes.json  TODO later ...
+    */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // TODO
+
+    /*
+    * Création du Render de bloc qui utilise le render de chaque élément du tableau TODO
+    */
+    function notesHtmlRender(theNotesArray, htmlDestination) {
+        let theHtmlCompilation = '<' + htmlDestination + '>';
+        for (let i = 0; i < theNotesArray.length; i++) {
+            // theHtmlCompilation += theNotesArray[i].render();
+            console.log(theNotesArray.length);
+            console.log('un élément') //TODO créer des éléments HTML depuis un array  1                            //  TODO    ( et utiliser __noteReference pour le choix ensuite) 2
+            theHtmlCompilation += '<div> un élément HTML</div>';
+        }
+        theHtmlCompilation = '</' + htmlDestination + '>';
+        document.getElementById(htmlDestination).innerHTML += theHtmlCompilation;
     }
 
     /*
@@ -40,6 +95,10 @@
     const colorsAllowedArray = ['vert', 'jaune', 'orange', 'rouge'];
 
     class AbstractNote {
+        // function displayNote(notesArrayToUse, htmlContainerType) { TODO pas compris l'utilité, le sens de cette fonction
+        //     // importedNotesArray, aside
+        //
+        // };
         constructor(title, importanceColor, creationDate, alertDate) {
             console.log(this)
             if (typeof title === 'string' && (typeof colorsAllowedArray.indexOf(title) === "number") && typeof creationDate === 'string') {
@@ -90,6 +149,12 @@
     }
 
     class Reminder extends AbstractNote {
+        function
+
+        render() {
+            return this.title;
+        }
+
         constructor(title, importanceColor, creationDate, content) {
             super(title, importanceColor, creationDate);
             this._contentText = content;
@@ -104,8 +169,13 @@
         }
     }
 
+    class ToDoList extends AbstractNote {
+        function
 
-    class toDoList extends AbstractNote {
+        render() {
+            return this.title;
+        }
+
         constructor(title, importanceColor, creationDate, content, toDoCheckArray) {
             super(title, importanceColor, creationDate);
             this._toDoArray = content;
@@ -129,39 +199,7 @@
         }
     }
 
-    // rem1 = new Reminder("name", "orange", "ceci, cela");
-    // console.log(notesJSON)
-    // notesJSON = JSON.stringify(notesJSON);
-    // console.log(notesJSON)
 
-    /*
-    Je dois pouvoir déstocker et stocker dans cet array notesJSON
-    */
-
-    /*
-    * Instanciation des notes en f° du contenu (si(tableau) : {})       TODO UNFINISHED
-    */
-    let importedNotes = ['test'];
-    // document.write(importedNotes[0]);
-    for (let i = 0; i < notesArray.length; i++) {
-        let importedNote;
-
-
-        if (notesArray[i].content[1].length > 1) {
-            importedNote = new toDoList(notesArray[i].title, notesArray[i].importanceColor, notesArray[i].creationDate, notesArray[i].content, notesArray[i].contentChecked);
-            document.write(importedNote.title);
-            console.log(i + ' tab')
-        } else {
-
-            console.log(i + ' mémo')
-        }
-        // document.write(importedNote.title);
-        // importedNotes.push(importedNote);
-
-        /*
-        * ANCIEN ! : Affichage de l'objet vers le HTML sans utiliser les classes : TODO to del
-         */
-    }
     // }
     //
     //         for (let i = 0; i < notesArray.length; i++) {
@@ -206,12 +244,15 @@
     /*
     * ANCIEN : injection de mes notes (sans util. des classes) vers le HTML TODO to del
     */
-    document.getElementById('the-notes').innerHTML = theNotes;
+
     /*
     * Ouverture et modification du JSON
      */
     xhttp.open("GET", "notes.json", true);
     xhttp.send();
+    document.getElementById('the-notes').innerHTML = '<div>bonjour</div>';
+    // document.getElementById('the-notes').innerHTML = theNotesCompilationForHTML;
+    notesHtmlRender([0, 1, 2], 'aside');
 </script>
 </body>
 </html>

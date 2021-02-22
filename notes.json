@@ -1,0 +1,42 @@
+{
+    "notes": [
+        {
+            "title": "Note Javascript (liste)",
+            "content": [
+                "élément 1 dans ma liste",
+                "élément 2 dans ma liste",
+                "élément 3 dans ma liste",
+                "etc"
+            ],
+            "contentChecked": [
+                true,
+                false,
+                true
+            ],
+            "creationDate": "15/01/2021",
+            "importanceColor": "red",
+            "alertDate": "null"
+        },
+        {
+            "title": "Notes Javascript 18",
+            "content": "Une méthode est une fonction appartenant à un objet",
+            "creationDate": "18/01/2021",
+            "importanceColor": "yellow",
+            "alertDate": "null"
+        },
+        {
+            "title": "Notes Javascript 20",
+            "content": "Une méthode est une fonction appartenant à un objet",
+            "creationDate": "20/01/2021",
+            "importanceColor": "green",
+            "alertDate": "null"
+        },
+        {
+            "title": "Notes Javascript 17",
+            "content": "Une méthode est une fonction appartenant à un objet",
+            "creationDate": "17/01/2021",
+            "importanceColor": "orange",
+            "alertDate": "null"
+        }
+    ]
+}

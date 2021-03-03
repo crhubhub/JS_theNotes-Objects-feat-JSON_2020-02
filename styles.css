@@ -4,13 +4,21 @@
 main {
     margin: 2em;
 }
+
 #the-notes {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 1em;
+    background: lightgray;
 }
-
+article {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1em;
+    background: pink;
+}
 .one-note {
     border: #0e1c2a 1px solid;
     padding: 0.5em;
+    background: aqua;
 }
